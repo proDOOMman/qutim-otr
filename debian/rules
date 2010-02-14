@@ -1,0 +1,32 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+build: clean build-stamp
+build-stamp:
+	lrelease-qt4 qutim_otr_ru.ts
+	qmake-qt4 -config debug otr.pro
+	dh build
+	touch $@
+
+clean:
+	dh clean
+
+install: install-stamp
+install-stamp:
+	
+	dh install
+	touch $@
+
+binary-indep: install
+	dh binary-indep
+
+binary-arch: install
+	dh binary-arch --before dh_strip
+	dh_strip -a --dbg-package=qutim-plugin-otr-dbg
+	dh binary-arch --after dh_strip
+
+binary: binary-arch binary-indep
+.PHONY: build clean binary-indep binary-arch binary install

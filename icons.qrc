@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="auth">images/authorise.png</file>
+        <file alias="uncrypted">images/end_session.png</file>
+        <file alias="otr">images/otr.png</file>
+        <file alias="encrypted">images/start_session.png</file>
+    </qresource>
+</RCC>

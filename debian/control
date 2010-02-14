@@ -1,0 +1,20 @@
+Source: qutim-plugin-otr
+Section: net
+Priority: optional
+Maintainer: Stanislav (proDOOMman) Kosolapov <prodoomman@shell.tor.hu>
+Build-Depends: debhelper (>= 7), libqt4-dev(>=4.4), qutim-dev(>=0.2), libotr2-dev
+Standards-Version: 3.8.1
+Homepage: http://qutim.org
+
+Package: qutim-plugin-otr
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: This is qutIM plugin for Off The Record private messaging
+
+Package: qutim-plugin-otr-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, qutim-plugin-otr(=${binary:Version})
+Description: qutIM otr plugin debug symbols, enabling you to provide developers full
+ debug information from gdb, if qutIM crashes.
