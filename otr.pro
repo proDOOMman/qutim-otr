@@ -6,7 +6,8 @@ HEADERS += otrcrypt.h \
     psi/OtrMessaging.hpp \
     psi/OtrInternal.hpp \
     smpdialog.h \
-    settingswidget.h
+    settingswidget.h \
+    global.h
 unix:INCLUDEPATH += /usr/include/libotr \
     /usr/include
 windows:INCLUDEPATH += C:/otr/w32root/include

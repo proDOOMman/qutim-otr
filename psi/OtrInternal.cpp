@@ -123,38 +123,38 @@ OtrInternal::OtrInternal(qutim_sdk_0_2::PluginSystemInterface *plugin,
     : m_userstate(),
       m_uiOps(),
       m_plugin(plugin),
-      m_keysFile(plugin->getProfilePath() + "/" + OTR_KEYS_FILE),
-      m_fingerprintFile(plugin->getProfilePath() + "/" + OTR_FINGERPRINTS_FILE),
+      m_keysFile(plugin->getProfilePath() + QDir::separator () + OTR_KEYS_FILE),
+      m_fingerprintFile(plugin->getProfilePath() + QDir::separator () + OTR_FINGERPRINTS_FILE),
       m_otrPolicy(policy),
       m_mutex()
 {
     //m_userstate = otrl_userstate_create();
     m_userstate = userstate;
-    m_uiOps.policy = (*OtrInternal::cb_policy);
-    m_uiOps.create_privkey = (*OtrInternal::cb_create_privkey);
-    m_uiOps.is_logged_in = (*OtrInternal::cb_is_logged_in);
-    m_uiOps.inject_message = (*OtrInternal::cb_inject_message);
-    m_uiOps.notify = (*OtrInternal::cb_notify);
-    m_uiOps.display_otr_message = (*OtrInternal::cb_display_otr_message);
-    m_uiOps.update_context_list = (*OtrInternal::cb_update_context_list);
-    m_uiOps.protocol_name = (*OtrInternal::cb_protocol_name);
-    m_uiOps.protocol_name_free = (*OtrInternal::cb_protocol_name_free);
-    m_uiOps.new_fingerprint = (*OtrInternal::cb_new_fingerprint);
-    m_uiOps.write_fingerprints = (*OtrInternal::cb_write_fingerprints);
-    m_uiOps.gone_secure = (*OtrInternal::cb_gone_secure);
-    m_uiOps.gone_insecure = (*OtrInternal::cb_gone_insecure);
-    m_uiOps.still_secure = (*OtrInternal::cb_still_secure);
-    m_uiOps.log_message = (*OtrInternal::cb_log_message);
-    m_uiOps.max_message_size = (*OtrInternal::cb_max_message_size);
+    m_uiOps.policy = (OtrInternal::cb_policy);
+    m_uiOps.create_privkey = (OtrInternal::cb_create_privkey);
+    m_uiOps.is_logged_in = (OtrInternal::cb_is_logged_in);
+    m_uiOps.inject_message = (OtrInternal::cb_inject_message);
+    m_uiOps.notify = (OtrInternal::cb_notify);
+    m_uiOps.display_otr_message = (OtrInternal::cb_display_otr_message);
+    m_uiOps.update_context_list = (OtrInternal::cb_update_context_list);
+    m_uiOps.protocol_name = (OtrInternal::cb_protocol_name);
+    m_uiOps.protocol_name_free = (OtrInternal::cb_protocol_name_free);
+    m_uiOps.new_fingerprint = (OtrInternal::cb_new_fingerprint);
+    m_uiOps.write_fingerprints = (OtrInternal::cb_write_fingerprints);
+    m_uiOps.gone_secure = (OtrInternal::cb_gone_secure);
+    m_uiOps.gone_insecure = (OtrInternal::cb_gone_insecure);
+    m_uiOps.still_secure = (OtrInternal::cb_still_secure);
+    m_uiOps.log_message = (OtrInternal::cb_log_message);
+    m_uiOps.max_message_size = (OtrInternal::cb_max_message_size);
 
 #if not (OTRL_VERSION_MAJOR==3 && OTRL_VERSION_MINOR==0)
     m_uiOps.account_name = NULL;
     m_uiOps.account_name_free = NULL;
 #endif
 
-    otrl_privkey_read(m_userstate, m_keysFile.toStdString().c_str());
+    otrl_privkey_read(m_userstate, m_keysFile.toLocal8Bit().data());
     otrl_privkey_read_fingerprints(m_userstate,
-                                   m_fingerprintFile.toStdString().c_str(),
+                                   m_fingerprintFile.toLocal8Bit().data(),
                                    NULL, NULL);
 }
 
@@ -211,7 +211,7 @@ QString OtrInternal::decryptMessage(const QString& from, const QString& to,
     char *newMessage = NULL;
     OtrlTLV *tlvs = NULL;
     OtrlTLV *tlv = NULL;
-    ConnContext *context;
+    ConnContext *context = 0;
     NextExpectedSMP nextMsg;
 
     ignoreMessage = otrl_message_receiving(m_userstate, &m_uiOps, this,
@@ -222,7 +222,7 @@ QString OtrInternal::decryptMessage(const QString& from, const QString& to,
                                            &newMessage,
                                            &tlvs, NULL, NULL);
 
-    context = otrl_context_find( m_userstate, from.toLocal8Bit(), to.toLocal8Bit(), protocol.toLocal8Bit(), 0, NULL, NULL, NULL);
+    context = otrl_context_find( m_userstate, from.toStdString().c_str(), to.toStdString().c_str(), protocol.toStdString().c_str(), 0, NULL, NULL, NULL);
 
 //    qDebug() << "[OTR] context fragment: " << QString(context->lastmessage);
 
@@ -232,9 +232,11 @@ QString OtrInternal::decryptMessage(const QString& from, const QString& to,
             gone_insecure(context);
     }
 
-    if (context) {
-        nextMsg = context->smstate->nextExpected;
-
+    while (context) {
+        OtrlSMState *state = context->smstate;
+        if(!state)
+            break;
+        nextMsg = state->nextExpected;
         tlv = otrl_tlv_find(tlvs, OTRL_TLV_SMP1Q);
         if (tlv) {
 //            qDebug() << "[OTR] SMP detected. Found SMP1Q";
@@ -319,6 +321,7 @@ QString OtrInternal::decryptMessage(const QString& from, const QString& to,
         }
 
         otrl_tlv_free(tlvs);
+        break;
     }
 
     if (ignoreMessage == 1) // internal protocol message
@@ -885,11 +888,10 @@ void OtrInternal::abortSMP(ConnContext *context, TreeModelItem &item)
 void OtrInternal::respondSMP(ConnContext *context, TreeModelItem &item, const QString &secret, bool initiate)
 {
     if( initiate ){
-            context = otrl_context_find( m_userstate, item.m_item_name.toLocal8Bit(), item.m_account_name.toLocal8Bit(), item.m_protocol_name.toLocal8Bit(), 0, NULL, NULL, NULL);
-            otrl_message_initiate_smp( m_userstate, &m_uiOps, this, context, (unsigned char*)secret.toLocal8Bit().data(), secret.toLocal8Bit().count() );
-
+            context = otrl_context_find( m_userstate, item.m_item_name.toAscii(), item.m_account_name.toAscii(), item.m_protocol_name.toAscii(), 0, NULL, NULL, NULL);
+            otrl_message_initiate_smp( m_userstate, &m_uiOps, this, context, (unsigned char*)secret.toAscii().data(), secret.toAscii().count() );
     } else {
-            otrl_message_respond_smp( m_userstate, &m_uiOps, this, context, (unsigned char*)secret.toUtf8().data(), secret.toUtf8().count());
+            otrl_message_respond_smp( m_userstate, &m_uiOps, this, context, (unsigned char*)secret.toAscii().data(), secret.toAscii().count());
     }
 
     sendCustomNessage(item,tr("Authenticating contact..."));
@@ -918,20 +920,20 @@ void OtrInternal::requestAuth(TreeModelItem &item, bool agree, QString answer, Q
     }
     if(!found)
         return;
-    ConnContext *context = otrl_context_find( m_userstate,item.m_item_name.toLocal8Bit(),item.m_account_name.toLocal8Bit(),item.m_protocol_name.toLocal8Bit(),1,NULL,NULL,NULL);
+    ConnContext *context = otrl_context_find(m_userstate,item.m_item_name.toAscii().data(),item.m_account_name.toAscii().data(),item.m_protocol_name.toAscii().data(),0,NULL,NULL,NULL);
     if(!context)
         return;
     if(!question.isNull())
     {
-        otrl_message_initiate_smp_q( m_userstate,&m_uiOps,this,context,question.toLocal8Bit(),(unsigned char *)answer.toLocal8Bit().data(),answer.toLocal8Bit().count());
+        otrl_message_initiate_smp_q( m_userstate,&m_uiOps,this,context,question.toAscii(),(unsigned char *)answer.toAscii().data(),answer.toAscii().count());
     } else
-    if(!answer.isNull())
-    {
-        otrl_message_initiate_smp(m_userstate,&m_uiOps,this,context,(unsigned char *)answer.toLocal8Bit().data(),answer.toLocal8Bit().count());
-    } else
-    if(agree)
-    {
-        verifyFingerprint(fingerprint, true);
+        if(!answer.isNull())
+        {
+        otrl_message_initiate_smp(m_userstate,&m_uiOps,this,context,(unsigned char *)answer.toAscii().data(),answer.toAscii().count());
+    } else    
+//        if(agree)
+        {
+        verifyFingerprint(fingerprint, agree);
     }
 }
 

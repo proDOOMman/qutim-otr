@@ -36,12 +36,7 @@ using namespace qutim_sdk_0_2;
 #include <QList>
 #include <QHash>
 
-extern "C"
-{
-#include <libotr/proto.h>
-#include <libotr/message.h>
-#include <libotr/privkey.h>
-}
+#include "global.h"
 
 class QString;
 

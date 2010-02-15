@@ -28,12 +28,7 @@
 #include <qutim/plugininterface.h>
 using namespace qutim_sdk_0_2;
 
-extern "C"
-{
-#include <libotr/proto.h>
-#include <libotr/message.h>
-#include <libotr/privkey.h>
-}
+#include "global.h"
 
 class OtrInternal;
 

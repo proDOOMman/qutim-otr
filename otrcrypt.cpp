@@ -17,6 +17,7 @@
 OTRCrypt::OTRCrypt():
         m_otrConnection(NULL)
 {
+    QTextCodec::setCodecForCStrings( QTextCodec::codecForName("utf8") );// кто-то еще использует другую кодировку? Ах да, есть же еще M$ с его ср1251...
     QTranslator translator;
     translator.load(QString("qutim_otr_")+QLocale::system().name());
     qApp->installTranslator(&translator);
@@ -146,6 +147,7 @@ void OTRCrypt::processEvent(Event &event)
     {
         contextItem = eventitem;
         mayBeCreateClosure(eventitem.m_account_name,eventitem.m_item_name,eventitem);
+        m_items[eventitem.m_account_name][eventitem.m_item_name]->updateMessageState();
         QSettings s(QSettings::defaultFormat(), QSettings::UserScope, "qutim/"+m_plugin_system->getProfileDir().dirName(), "otr");
         int pol = s.value(contextItem.m_protocol_name+"/"+contextItem.m_account_name+"/"+contextItem.m_item_name,-1).toInt();
         if(pol==-1)
