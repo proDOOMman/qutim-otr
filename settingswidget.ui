@@ -17,7 +17,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -38,6 +38,9 @@
          <property name="selectionBehavior">
           <enum>QAbstractItemView::SelectRows</enum>
          </property>
+         <attribute name="horizontalHeaderStretchLastSection">
+          <bool>true</bool>
+         </attribute>
          <attribute name="horizontalHeaderStretchLastSection">
           <bool>true</bool>
          </attribute>
@@ -100,6 +103,9 @@
          <attribute name="horizontalHeaderStretchLastSection">
           <bool>true</bool>
          </attribute>
+         <attribute name="horizontalHeaderStretchLastSection">
+          <bool>true</bool>
+         </attribute>
          <column>
           <property name="text">
            <string>Account</string>
@@ -131,6 +137,16 @@
        <string>Config</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QCheckBox" name="notify_checkbox">
+         <property name="text">
+          <string>Add OTR state notification to chat window (WebKit needed)</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
        <item>
         <widget class="QGroupBox" name="groupBox">
          <property name="title">

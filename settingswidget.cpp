@@ -23,6 +23,7 @@ SettingsWidget::SettingsWidget(psiotr::OtrMessaging *otr, PluginSystemInterface 
 {
     setupUi(this);
     QSettings s(QSettings::defaultFormat(), QSettings::UserScope, "qutim/"+m_plugin->getProfileDir().dirName(), "otr");
+    notify_checkbox->setChecked(s.value("notify",true).toBool());
     switch(s.value("policy",psiotr::OTR_POLICY_AUTO).toInt())
     {
     case psiotr::OTR_POLICY_OFF:
@@ -141,6 +142,7 @@ void SettingsWidget::save()
     else if(polEnable->isChecked()&&polEnable->isEnabled())
         pol = psiotr::OTR_POLICY_ENABLED;
     s.setValue("policy",pol);
+    s.setValue("notify",notify_checkbox->isChecked());
     m_otr->setPolicy((OtrPolicy)pol);
 }
 

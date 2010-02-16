@@ -191,6 +191,8 @@ void PsiOtrClosure::updateState()
             enabled = false;
         else if(s.value(m_item.m_protocol_name+"/"+m_item.m_account_name+"/"+m_item.m_item_name,-1).toInt()>0)
             enabled = true;
+        if(!s.value("notify",true).toBool())
+            enabled = false;
         if(!enabled)
             return;
         prevState = newState;

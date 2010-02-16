@@ -4,57 +4,57 @@
 <context>
     <name>OTRCrypt</name>
     <message>
-        <location filename="otrcrypt.cpp" line="67"/>
+        <location filename="otrcrypt.cpp" line="68"/>
         <source>Start private Conversation</source>
         <translation>Начать закрытый сеанс</translation>
     </message>
     <message>
-        <location filename="otrcrypt.cpp" line="69"/>
+        <location filename="otrcrypt.cpp" line="70"/>
         <source>End private Conversation</source>
         <translation>Завершить закрытый сеанс</translation>
     </message>
     <message>
-        <location filename="otrcrypt.cpp" line="72"/>
+        <location filename="otrcrypt.cpp" line="73"/>
         <source>Verify Fingerprint</source>
         <translation>Авторизовать пользователя</translation>
     </message>
     <message>
-        <location filename="otrcrypt.cpp" line="74"/>
+        <location filename="otrcrypt.cpp" line="75"/>
         <source>Show secure Session ID</source>
         <translation>Показать ID сессии шифрования</translation>
     </message>
     <message>
-        <location filename="otrcrypt.cpp" line="76"/>
+        <location filename="otrcrypt.cpp" line="77"/>
         <source>Show own Fingerprint</source>
         <translation>Показать вашу подпись</translation>
     </message>
     <message>
-        <location filename="otrcrypt.cpp" line="79"/>
+        <location filename="otrcrypt.cpp" line="80"/>
         <source>Personal settings</source>
         <translation>Персональные настройки</translation>
     </message>
     <message>
-        <location filename="otrcrypt.cpp" line="82"/>
+        <location filename="otrcrypt.cpp" line="83"/>
         <source>System settings</source>
         <translation>Системные настройки</translation>
     </message>
     <message>
-        <location filename="otrcrypt.cpp" line="83"/>
+        <location filename="otrcrypt.cpp" line="84"/>
         <source>OTR disabled</source>
         <translation>OTR выключен</translation>
     </message>
     <message>
-        <location filename="otrcrypt.cpp" line="84"/>
+        <location filename="otrcrypt.cpp" line="85"/>
         <source>Manual</source>
         <translation>Ручной режим</translation>
     </message>
     <message>
-        <location filename="otrcrypt.cpp" line="85"/>
+        <location filename="otrcrypt.cpp" line="86"/>
         <source>Auto</source>
         <translation>Автоматический режим</translation>
     </message>
     <message>
-        <location filename="otrcrypt.cpp" line="86"/>
+        <location filename="otrcrypt.cpp" line="87"/>
         <source>Force OTR</source>
         <translation>Принудительное шифрование</translation>
     </message>
@@ -63,7 +63,7 @@
         <translation type="obsolete">не защищено</translation>
     </message>
     <message>
-        <location filename="otrcrypt.cpp" line="206"/>
+        <location filename="otrcrypt.cpp" line="212"/>
         <source>&lt;b&gt;OTR disabled&lt;/b&gt;</source>
         <translation>&lt;b&gt;Шифрование выключено&lt;/b&gt;</translation>
     </message>
@@ -72,12 +72,12 @@
         <translation type="obsolete">защищено</translation>
     </message>
     <message>
-        <location filename="otrcrypt.cpp" line="202"/>
+        <location filename="otrcrypt.cpp" line="208"/>
         <source>&lt;b&gt;OTR encryption is active&lt;/b&gt;</source>
         <translation>&lt;b&gt;Шифрование активно&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="otrcrypt.cpp" line="198"/>
+        <location filename="otrcrypt.cpp" line="204"/>
         <source>&lt;b&gt;OTR is active, but user unverifed&lt;/b&gt;</source>
         <translation>&lt;b&gt;Шифрование активно, но собеседник не авторизован&lt;/b&gt;</translation>
     </message>
@@ -164,7 +164,7 @@
         <translation>%1 завершил сессию шифрования. Вы должны сделать то же самое.</translation>
     </message>
     <message>
-        <location filename="psi/OtrInternal.cpp" line="249"/>
+        <location filename="psi/OtrInternal.cpp" line="251"/>
         <source>Please, answer the question to be authorised by %1.&lt;br&gt;Question: &lt;b&gt;%2&lt;/b&gt;</source>
         <translation>Пожалуйста, ответьте на вопрос для авторизации пользователем %1.&lt;br&gt; Вопрос: &lt;b&gt;%2&lt;b&gt;</translation>
     </message>
@@ -175,39 +175,39 @@ Question: &lt;b&gt;%2&lt;/b&gt;</source>
 Вопрос: &lt;b&gt;%2&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="psi/OtrInternal.cpp" line="317"/>
+        <location filename="psi/OtrInternal.cpp" line="319"/>
         <source>Authentication error!</source>
         <translation>Ошибка авторизации!</translation>
     </message>
     <message>
-        <location filename="psi/OtrInternal.cpp" line="330"/>
+        <location filename="psi/OtrInternal.cpp" line="333"/>
         <source>received %1 
 OTR state now is [%2]</source>
         <translation>получено %1
 состояние шифования [%2]</translation>
     </message>
     <message>
-        <location filename="psi/OtrInternal.cpp" line="601"/>
+        <location filename="psi/OtrInternal.cpp" line="604"/>
         <source>not private</source>
         <translation>не защищено</translation>
     </message>
     <message>
-        <location filename="psi/OtrInternal.cpp" line="611"/>
+        <location filename="psi/OtrInternal.cpp" line="614"/>
         <source>private</source>
         <translation>защищено</translation>
     </message>
     <message>
-        <location filename="psi/OtrInternal.cpp" line="613"/>
+        <location filename="psi/OtrInternal.cpp" line="616"/>
         <source>unverifed</source>
         <translation>не идентифицирован</translation>
     </message>
     <message>
-        <location filename="psi/OtrInternal.cpp" line="695"/>
+        <location filename="psi/OtrInternal.cpp" line="698"/>
         <source>Key generation will be started.&lt;br&gt;Please, make sure that you &lt;b&gt;log out from all your jabber accounts&lt;/b&gt;! QutIM may be crashed if they will be online while key is generating.</source>
         <translation>Сейчас будет запущена генерация личного ключа.&lt;br&gt;Пожалуйста, &lt;b&gt;убедитесь что все jabber аккаунты находятся в состоянии &quot;Не в сети&quot;!&lt;/b&gt;&lt;br&gt;QutIM может завершиться с ошибкой если при создании ключа jabber аккаунт будет активен.</translation>
     </message>
     <message>
-        <location filename="psi/OtrInternal.cpp" line="867"/>
+        <location filename="psi/OtrInternal.cpp" line="870"/>
         <source>Account %1 has received new fingerprint from %2 :
  %3</source>
         <oldsource>Account %1 has received new fingerprint from %2 :
@@ -216,12 +216,12 @@ OTR state now is [%2]</source>
 %3</translation>
     </message>
     <message>
-        <location filename="psi/OtrInternal.cpp" line="881"/>
+        <location filename="psi/OtrInternal.cpp" line="884"/>
         <source>Authentication aborded. The conversation is now insecure!</source>
         <translation>Авторизация прервана. Общение теперь небезопасно!</translation>
     </message>
     <message>
-        <location filename="psi/OtrInternal.cpp" line="895"/>
+        <location filename="psi/OtrInternal.cpp" line="897"/>
         <source>Authenticating contact...</source>
         <translation>Авторизация контакта...</translation>
     </message>
@@ -230,7 +230,7 @@ OTR state now is [%2]</source>
         <translation type="obsolete">&lt;b&gt;%1&lt;/b&gt; завершил OTR сессию. Вы должны сделать то же самое.</translation>
     </message>
     <message>
-        <location filename="psi/OtrInternal.cpp" line="249"/>
+        <location filename="psi/OtrInternal.cpp" line="251"/>
         <source>Auth</source>
         <translation>Авторизация</translation>
     </message>
@@ -241,33 +241,33 @@ Question: %2</source>
 Внимание, вопрос: %2</translation>
     </message>
     <message>
-        <location filename="psi/OtrInternal.cpp" line="264"/>
+        <location filename="psi/OtrInternal.cpp" line="266"/>
         <source>Authorysing</source>
         <translation>Авторизация</translation>
     </message>
     <message>
-        <location filename="psi/OtrInternal.cpp" line="264"/>
+        <location filename="psi/OtrInternal.cpp" line="266"/>
         <source>Please, enter passphrase to authorise %1</source>
         <translation>Пожалуйста, введите секретную фразу дла авторизации пользователем %1</translation>
     </message>
     <message>
-        <location filename="psi/OtrInternal.cpp" line="287"/>
+        <location filename="psi/OtrInternal.cpp" line="289"/>
         <source>Your buddy has successfully authenticated you. The conversation is now secure!</source>
         <translation>Ваш собеседник успешно авторизовал вас. Общение теперь безопасно!</translation>
     </message>
     <message>
-        <location filename="psi/OtrInternal.cpp" line="291"/>
+        <location filename="psi/OtrInternal.cpp" line="293"/>
         <source>Your buddy has successfully authenticated you. You may want to authenticate your buddy as well by asking your own question.</source>
         <translation>Ваш собеседник успешно авторизовал вас. Вы также должны авторизовать его, задав ему ваш вопрос.</translation>
     </message>
     <message>
-        <location filename="psi/OtrInternal.cpp" line="305"/>
+        <location filename="psi/OtrInternal.cpp" line="307"/>
         <source>Authentication successful. The conversation is now secure!</source>
         <oldsource>&lt;b&gt;Authentication successful. The conversation is now secure!&lt;/b&gt;</oldsource>
         <translation>Авторизация завершилась успешно. Общение теперь безопасно!</translation>
     </message>
     <message>
-        <location filename="psi/OtrInternal.cpp" line="308"/>
+        <location filename="psi/OtrInternal.cpp" line="310"/>
         <source>Authentication failed. The conversation is now insecure!</source>
         <oldsource>&lt;b&gt;Authentication failed. The conversation is now insecure!&lt;/b&gt;</oldsource>
         <translation>Авторизация провалилась. Общение небезопасно!</translation>
@@ -281,7 +281,7 @@ Question: %2</source>
         <translation type="obsolete">принято </translation>
     </message>
     <message>
-        <location filename="psi/OtrInternal.cpp" line="334"/>
+        <location filename="psi/OtrInternal.cpp" line="337"/>
         <source>
 sessionId: </source>
         <translation>
@@ -296,20 +296,20 @@ ID сессии:</translation>
         <translation type="obsolete">зашифровано</translation>
     </message>
     <message>
-        <location filename="psi/OtrInternal.cpp" line="617"/>
+        <location filename="psi/OtrInternal.cpp" line="620"/>
         <source>finished</source>
         <translation>завершено</translation>
     </message>
     <message>
-        <location filename="psi/OtrInternal.cpp" line="620"/>
+        <location filename="psi/OtrInternal.cpp" line="623"/>
         <source>unknown</source>
         <translation>неизвестно</translation>
     </message>
     <message>
         <location filename="psi/OtrInternal.cpp" line="184"/>
-        <location filename="psi/OtrInternal.cpp" line="695"/>
-        <location filename="psi/OtrInternal.cpp" line="704"/>
-        <location filename="psi/OtrInternal.cpp" line="729"/>
+        <location filename="psi/OtrInternal.cpp" line="698"/>
+        <location filename="psi/OtrInternal.cpp" line="707"/>
+        <location filename="psi/OtrInternal.cpp" line="732"/>
         <source>qutim-otr</source>
         <translation>QutIM OTR</translation>
     </message>
@@ -318,7 +318,7 @@ ID сессии:</translation>
         <translation type="obsolete">Сейчас будет запущена генерация личного ключа.&lt;br&gt;Пожалуйста, &lt;b&gt;убедитесь что все jabber аккаунты находятся в состоянии &quot;Не в сети&quot;!&lt;/b&gt;&lt;br&gt;QutIM может завершиться с ошибкой если при создании ключа jabber аккаунт будет активен.&lt;br&gt;Продолжить?</translation>
     </message>
     <message>
-        <location filename="psi/OtrInternal.cpp" line="705"/>
+        <location filename="psi/OtrInternal.cpp" line="708"/>
         <source>Generating keys for account %1
 This may take a while.
 Please, move mouse and use keyoard to decrease generation time.</source>
@@ -327,19 +327,19 @@ Please, move mouse and use keyoard to decrease generation time.</source>
 Для ускорения процесса, пожалуйста, подвигайте мышкой и постучите по клавиатуре.</translation>
     </message>
     <message>
-        <location filename="psi/OtrInternal.cpp" line="709"/>
+        <location filename="psi/OtrInternal.cpp" line="712"/>
         <source>please wait...</source>
         <translation>Подождите...</translation>
     </message>
     <message>
-        <location filename="psi/OtrInternal.cpp" line="730"/>
+        <location filename="psi/OtrInternal.cpp" line="733"/>
         <source>Failed to generate key for account %1
 The OTR Plugin will not work.</source>
         <translation>Не удалось создать ключ для аккаунта %1
 Плагин OTR не будет работать.</translation>
     </message>
     <message>
-        <location filename="psi/OtrInternal.cpp" line="737"/>
+        <location filename="psi/OtrInternal.cpp" line="740"/>
         <source>The fingerprint for account %1 is
 </source>
         <translation>Отпечаток для аккаунта %1 это</translation>
@@ -448,79 +448,84 @@ The OTR Plugin will not work.</source>
         <translation>Известные подписи</translation>
     </message>
     <message>
-        <location filename="settingswidget.ui" line="46"/>
-        <location filename="settingswidget.ui" line="105"/>
+        <location filename="settingswidget.ui" line="49"/>
+        <location filename="settingswidget.ui" line="111"/>
         <source>Account</source>
         <translation>Аккаунт</translation>
     </message>
     <message>
-        <location filename="settingswidget.ui" line="51"/>
+        <location filename="settingswidget.ui" line="54"/>
         <source>Pecipient</source>
         <translation>Пользователь</translation>
     </message>
     <message>
-        <location filename="settingswidget.ui" line="56"/>
+        <location filename="settingswidget.ui" line="59"/>
         <source>Fingerprint</source>
         <translation>Подпись</translation>
     </message>
     <message>
-        <location filename="settingswidget.ui" line="61"/>
+        <location filename="settingswidget.ui" line="64"/>
         <source>Trust</source>
         <translation>Доверен</translation>
     </message>
     <message>
-        <location filename="settingswidget.ui" line="66"/>
+        <location filename="settingswidget.ui" line="69"/>
         <source>Message state</source>
         <translation>Состояние</translation>
     </message>
     <message>
-        <location filename="settingswidget.ui" line="76"/>
-        <location filename="settingswidget.ui" line="123"/>
+        <location filename="settingswidget.ui" line="79"/>
+        <location filename="settingswidget.ui" line="129"/>
         <source>Forget</source>
         <translation>Забыть подпись</translation>
     </message>
     <message>
-        <location filename="settingswidget.ui" line="86"/>
+        <location filename="settingswidget.ui" line="89"/>
         <source>My private keys</source>
         <translation>Мои личные ключи</translation>
     </message>
     <message>
-        <location filename="settingswidget.ui" line="110"/>
+        <location filename="settingswidget.ui" line="116"/>
         <source>Protocol</source>
         <translation>Протокол</translation>
     </message>
     <message>
-        <location filename="settingswidget.ui" line="115"/>
+        <location filename="settingswidget.ui" line="121"/>
         <source>Key</source>
         <translation>Ключ</translation>
     </message>
     <message>
-        <location filename="settingswidget.ui" line="131"/>
+        <location filename="settingswidget.ui" line="137"/>
         <source>Config</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="settingswidget.ui" line="137"/>
+        <location filename="settingswidget.ui" line="143"/>
+        <source>Add OTR state notification to chat window (WebKit needed)</source>
+        <translation>Включить отображения состояния OTR (WebKit)</translation>
+    </message>
+    <message>
+        <location filename="settingswidget.ui" line="153"/>
         <source>OTR policy</source>
         <translation>Политика OTR</translation>
     </message>
     <message>
-        <location filename="settingswidget.ui" line="143"/>
+        <location filename="settingswidget.ui" line="159"/>
         <source>Enable private messaging</source>
         <translation>Включить шифрование сообщений</translation>
     </message>
     <message>
-        <location filename="settingswidget.ui" line="153"/>
+        <location filename="settingswidget.ui" line="169"/>
         <source>Automatically start private messaging</source>
         <translation>Автоматически запускать шифрование</translation>
     </message>
     <message>
-        <location filename="settingswidget.ui" line="163"/>
+        <location filename="settingswidget.ui" line="179"/>
         <source>Require private messaging</source>
         <translation>Принудительно шифровать сообщения</translation>
     </message>
     <message>
-        <location filename="settingswidget.cpp" line="151"/>
+        <location filename="settingswidget.cpp" line="153"/>
         <source>Are you sure you want to delete the fingerprint:
 account: %1
 buddy: %2
@@ -531,13 +536,13 @@ fingerprint: %3</source>
 подпись: %3</translation>
     </message>
     <message>
-        <location filename="settingswidget.cpp" line="153"/>
-        <location filename="settingswidget.cpp" line="170"/>
+        <location filename="settingswidget.cpp" line="155"/>
+        <location filename="settingswidget.cpp" line="172"/>
         <source>qutim-otr</source>
         <translation>QutIM OTR</translation>
     </message>
     <message>
-        <location filename="settingswidget.cpp" line="168"/>
+        <location filename="settingswidget.cpp" line="170"/>
         <source>Are you sure you want to delete the private key:
 account: %1
 protocol: %2
@@ -567,7 +572,7 @@ protocol: %2
         <translation type="obsolete">Невозможно найти подпись для данного собеседника.</translation>
     </message>
     <message>
-        <location filename="psi/psiotrclosure.cpp" line="127"/>
+        <location filename="psi/psiotrclosure.cpp" line="126"/>
         <source>no active encrypted session</source>
         <translation>сессия шифрования отсутствует</translation>
     </message>
@@ -576,22 +581,22 @@ protocol: %2
         <translation type="obsolete">ID сессии соединения аккаунта %1 к собеседнику %2:</translation>
     </message>
     <message>
-        <location filename="psi/psiotrclosure.cpp" line="131"/>
+        <location filename="psi/psiotrclosure.cpp" line="130"/>
         <source>Session ID of connection from account %1 to %2 is: </source>
         <translation>ID сессии соединения аккаунта %1 к собеседнику %2: </translation>
     </message>
     <message>
-        <location filename="psi/psiotrclosure.cpp" line="155"/>
+        <location filename="psi/psiotrclosure.cpp" line="153"/>
         <source>no private key for </source>
         <translation>отсутствуют личные ключи для</translation>
     </message>
     <message>
-        <location filename="psi/psiotrclosure.cpp" line="158"/>
+        <location filename="psi/psiotrclosure.cpp" line="156"/>
         <source>Fingerprint for account %1 is:</source>
         <translation>Подпись для аккаунта %1 это:</translation>
     </message>
     <message>
-        <location filename="psi/psiotrclosure.cpp" line="186"/>
+        <location filename="psi/psiotrclosure.cpp" line="200"/>
         <source>OTR state is changed. New state is [%1]</source>
         <translation>Состояние шифрования изменено. Новое состояние: [%1]</translation>
     </message>

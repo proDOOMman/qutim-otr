@@ -166,6 +166,8 @@ void OTRCrypt::processEvent(Event &event)
     if ( event.id == m_event_incoming_message ){
             QString *msg = (QString*) (event.args.at(1));
             decryptMessage(msg,eventitem);
+            
+            
 //            if(msg->isEmpty())
 //            {
 //                if(event.args.count()>2)
@@ -222,6 +224,8 @@ void OTRCrypt::processEvent(Event &event)
             enabled = false;
         else if(s.value(eventitem.m_protocol_name+"/"+eventitem.m_account_name+"/"+eventitem.m_item_name,-1).toInt()>0)
             enabled = true;
+        if(!s.value("notify",true).toBool())
+            enabled = false;
         if(enabled)
             msg->append(QString(" <div id=\"statusImage_%1\"><br><img src=\"data:image/png;base64,%3\""
                     "alt=\"Status\" width=\"32\" height=\"32\" onload=\"javascript:"

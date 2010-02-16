@@ -1,3 +1,15 @@
+qutim-plugin-otr (0.2-1~ppa6) karmic; urgency=low
+
+  * Notification is deactivatable, small fixes
+
+ -- Stanislav (proDOOMman) Kosolapov <prodoomman@shell.tor.hu>  Tue, 16 Feb 2010 21:05:26 +0300
+
+qutim-plugin-otr (0.2-1~ppa5) karmic; urgency=low
+
+  * Updated from git, small fixes
+
+ -- Stanislav (proDOOMman) Kosolapov <prodoomman@shell.tor.hu>  Mon, 15 Feb 2010 10:49:44 +0300
+
 qutim-plugin-otr (0.2-1~ppa4) karmic; urgency=low
 
   * Small fixes
