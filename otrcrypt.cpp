@@ -168,31 +168,18 @@ void OTRCrypt::processEvent(Event &event)
     if ( event.id == m_event_incoming_message ){
             QString *msg = (QString*) (event.args.at(1));
             decryptMessage(msg,eventitem);
-            
-//            if(msg->isEmpty())
-//            {
-//                if(event.args.count()>2)
-//                    *(bool*)(event.args.at(2)) = false;
-//                else
-//                {
-//                    msg->append(tr("OTR system message"));
-//                    event.args.append(new bool(false));
-//                }
-//            }
     } else
         if ( event.id == m_event_fully_incoming_message || event.id == m_event_fully_outcoming_message ){
         QString *msg = (QString*) (event.args.at(1));
-//        if(msg->contains("&lt;b&gt;",Qt::CaseSensitive))
-//        {
-//            msg->replace("&lt;", "<");
-//            msg->replace("&gt;", ">");
-//        }
-        mayBeCreateClosure(eventitem.m_account_name,eventitem.m_item_name,eventitem);
-        if(!msg->startsWith("<OTR service>\n"))
+        if(msg->contains("&lt;b&gt;",Qt::CaseSensitive)||msg->contains("&lt;i&gt;",Qt::CaseSensitive))
         {
-//            m_items[eventitem.m_account_name][eventitem.m_item_name]->updateState();
+            msg->replace("&lt;b&gt;", "<b>");
+            msg->replace("&lt;/b&gt;", "</b>");
+            msg->replace("&lt;i&gt;", "<i>");
+            msg->replace("&lt;/i&gt;", "</i>");
         }
-        else
+        mayBeCreateClosure(eventitem.m_account_name,eventitem.m_item_name,eventitem);
+        if(msg->startsWith("<OTR service>\n"))
             msg->remove("<OTR service>\n");
         int id = m_items[eventitem.m_account_name][eventitem.m_item_name]->getCurrentId();
         QString fileName;
@@ -246,7 +233,6 @@ void OTRCrypt::processEvent(Event &event)
             msg->remove("<Internal OTR message>\n");
             QString message(*msg);
             message = message.remove("<Internal OTR message>\n").remove("<b>");
-            //m_plugin_system->addServiceMessage(eventitem,message);
         }
         if(msg->startsWith("<OTR service>\n"))
             msg->remove("<OTR service>\n");
@@ -262,7 +248,6 @@ void OTRCrypt::decryptMessage(QString *message, TreeModelItem &item)
     QSystemSemaphore sem("keygen",1,QSystemSemaphore::Open);
     if(sem.acquire())
     {
-//        qDebug() << "[OTR] decrypt...";
         mayBeCreateClosure(myacc,himacc,item);
         QString decrypted = m_items[myacc][himacc]->getMessaging()->decryptMessage(
                 himacc,
