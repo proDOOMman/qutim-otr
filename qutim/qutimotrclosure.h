@@ -71,21 +71,21 @@ using namespace qutim_sdk_0_2;
 class QAction;
 class QMenu;
 
-namespace psiotr
+namespace qutimotr
 {
 class PsiOtrPlugin;
 class OtrMessaging;
 
 //-----------------------------------------------------------------------------
 
-class PsiOtrClosure : public QObject
+class QutimOtrClosure : public QObject
 {
 Q_OBJECT
 
 public:
-        PsiOtrClosure(/*int*/QString &account, const QString& item_name,
+        QutimOtrClosure(/*int*/QString &account, const QString& item_name,
                       QList<OtrMessaging*> otrc_list, TreeModelItem &item, PluginSystemInterface* pluginSystem);
-        ~PsiOtrClosure();
+        ~QutimOtrClosure();
         void setIsLoggedIn(bool isLoggedIn);
         bool isLoggedIn() const;
         void setDialog(QAction*a);
@@ -131,6 +131,6 @@ public slots:
 
 //-----------------------------------------------------------------------------
 
-} // namespace psiotr
+} // namespace qutimotr
 
 #endif

@@ -16,7 +16,7 @@
 #define SETTINGSWIDGET_H
 
 #include "ui_settingswidget.h"
-#include "psi/OtrMessaging.hpp"
+#include "qutim/OtrMessaging.hpp"
 #include <qutim/plugininterface.h>
 #include <QMessageBox>
 #include "smpdialog.h"
@@ -25,11 +25,11 @@ using namespace qutim_sdk_0_2;
 class SettingsWidget : public QWidget, private Ui::SettingsWidget {
     Q_OBJECT
 public:
-    SettingsWidget(psiotr::OtrMessaging *otr, PluginSystemInterface *plugin, QWidget *parent = 0);
+    SettingsWidget(qutimotr::OtrMessaging *otr, PluginSystemInterface *plugin, QWidget *parent = 0);
 private:
-    psiotr::OtrMessaging *m_otr;
+    qutimotr::OtrMessaging *m_otr;
     PluginSystemInterface *m_plugin;
-    QList<psiotr::Fingerprint>  m_fingerprints;
+    QList<qutimotr::Fingerprint>  m_fingerprints;
 public slots:
     void save();
 private slots:

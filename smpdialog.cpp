@@ -21,7 +21,7 @@ SMPdialog::SMPdialog(TreeModelItem &item, OtrMessaging *otr, QWidget *parent) :
     m_otr(otr)
 {
     setupUi(this);
-    psiotr::Fingerprint fingerprint;
+    qutimotr::Fingerprint fingerprint;
     bool found = false;
 
     foreach(fingerprint, m_otr->getFingerprints())

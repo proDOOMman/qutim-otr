@@ -50,7 +50,7 @@ class OtrInternal:public QObject
     Q_OBJECT
 public:
 
-    OtrInternal(PluginSystemInterface *plugin, psiotr::OtrPolicy& policy, OtrlUserState userstate);
+    OtrInternal(PluginSystemInterface *plugin, qutimotr::OtrPolicy& policy, OtrlUserState userstate);
 
     ~OtrInternal();
 
@@ -64,11 +64,11 @@ public:
     QString decryptMessage(const QString& from, const QString& to,
                            const QString& message, TreeModelItem &item);
 
-    QList<psiotr::Fingerprint> getFingerprints();
+    QList<qutimotr::Fingerprint> getFingerprints();
 
-    void verifyFingerprint(const psiotr::Fingerprint& fingerprint, bool verified);
+    void verifyFingerprint(const qutimotr::Fingerprint& fingerprint, bool verified);
 
-    void deleteFingerprint(const psiotr::Fingerprint& fingerprint);
+    void deleteFingerprint(const qutimotr::Fingerprint& fingerprint);
 
     void deleteKey(QString account, QString protocol);
 
@@ -80,7 +80,7 @@ public:
 
     void endSession(const QString& account, const QString& jid, TreeModelItem &item);
 
-    psiotr::OtrMessageState getMessageState(const QString& thisJid,
+    qutimotr::OtrMessageState getMessageState(const QString& thisJid,
                                             const QString& remoteJid,
                                             TreeModelItem &item);
 
@@ -185,7 +185,7 @@ private:
     /**
     * Reference to the default OTR policy
     */
-    psiotr::OtrPolicy& m_otrPolicy;
+    qutimotr::OtrPolicy& m_otrPolicy;
 
     QMutex m_mutex;
 };

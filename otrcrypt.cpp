@@ -34,6 +34,8 @@ bool OTRCrypt::init(PluginSystemInterface *plugin_system)
     m_event_temporary_receive = m_plugin_system->registerEventHandler("Core/ChatWindow/ReceiveLevel2", this);
     m_event_context = m_plugin_system->registerEventHandler("Core/ContactList/ContactContext", this);
     m_event_fully_outcoming_message = m_plugin_system->registerEventHandler("Core/ChatWindow/SendLevel1.5", this);
+    qsrand(QTime::currentTime().msec()+QCoreApplication::applicationPid());
+    OTRL_INIT;
     return true;
 }
 
@@ -53,14 +55,14 @@ void OTRCrypt::setProfileName(const QString &name)
         m_otrConnectionNone = 0;
         m_otrConnectionReq = 0;
     }
-    QSettings s(QSettings::defaultFormat(), QSettings::UserScope, "qutim/"+m_plugin_system->getProfileDir().dirName(), "otr");
-    OTRL_INIT;
+    QSettings s(QSettings::defaultFormat(),
+                QSettings::UserScope, "qutim/"+m_plugin_system->getProfileDir().dirName(), "otr");
     OtrlUserState state = otrl_userstate_create();
-    m_otrConnection = new OtrMessaging(m_plugin_system,(OtrPolicy)s.value("policy",psiotr::OTR_POLICY_AUTO).toInt(), state);
-    m_otrConnectionAuto = new OtrMessaging(m_plugin_system,psiotr::OTR_POLICY_AUTO, state);
-    m_otrConnectionNone = new OtrMessaging(m_plugin_system,psiotr::OTR_POLICY_OFF, state);
-    m_otrConnectionManual = new OtrMessaging(m_plugin_system,psiotr::OTR_POLICY_ENABLED, state);
-    m_otrConnectionReq = new OtrMessaging(m_plugin_system,psiotr::OTR_POLICY_REQUIRE, state);
+    m_otrConnection = new OtrMessaging(m_plugin_system,(OtrPolicy)s.value("policy",qutimotr::OTR_POLICY_AUTO).toInt(), state);
+    m_otrConnectionAuto = new OtrMessaging(m_plugin_system,qutimotr::OTR_POLICY_AUTO, state);
+    m_otrConnectionNone = new OtrMessaging(m_plugin_system,qutimotr::OTR_POLICY_OFF, state);
+    m_otrConnectionManual = new OtrMessaging(m_plugin_system,qutimotr::OTR_POLICY_ENABLED, state);
+    m_otrConnectionReq = new OtrMessaging(m_plugin_system,qutimotr::OTR_POLICY_REQUIRE, state);
     if(!m_chatDlgAction)
     {
         m_chatDlgAction = new QAction(QIcon(":/otr"), "OTR", this);
@@ -107,7 +109,7 @@ void OTRCrypt::contextMenuEvent(QAction *a)
     QString myacc = contextItem.m_account_name;
     QString himacc = contextItem.m_item_name;
     mayBeCreateClosure(myacc,himacc,contextItem);
-    PsiOtrClosure *closure = m_items[myacc][himacc];
+    QutimOtrClosure *closure = m_items[myacc][himacc];
     switch(a->data().toInt())
     {
     case 0:
@@ -136,7 +138,7 @@ void OTRCrypt::contextSettingsMenuEvent(QAction *a)
     QString myacc = contextItem.m_account_name;
     QString himacc = contextItem.m_item_name;
     mayBeCreateClosure(myacc,himacc,contextItem);
-    PsiOtrClosure *closure = m_items[myacc][himacc];
+    QutimOtrClosure *closure = m_items[myacc][himacc];
     closure->setPolicy(a->data().toInt());
 }
 
@@ -166,7 +168,6 @@ void OTRCrypt::processEvent(Event &event)
     if ( event.id == m_event_incoming_message ){
             QString *msg = (QString*) (event.args.at(1));
             decryptMessage(msg,eventitem);
-            
             
 //            if(msg->isEmpty())
 //            {
@@ -218,7 +219,7 @@ void OTRCrypt::processEvent(Event &event)
         QByteArray a = f.readAll();
         bool enabled = false;
         QSettings s(QSettings::defaultFormat(), QSettings::UserScope, "qutim/"+m_plugin_system->getProfileDir().dirName(), "otr");
-        if(s.value("policy",psiotr::OTR_POLICY_AUTO).toInt()!=psiotr::OTR_POLICY_OFF)
+        if(s.value("policy",qutimotr::OTR_POLICY_AUTO).toInt()!=qutimotr::OTR_POLICY_OFF)
             enabled = true;
         if(!s.value(eventitem.m_protocol_name+"/"+eventitem.m_account_name+"/"+eventitem.m_item_name,-1).toInt())
             enabled = false;
@@ -296,7 +297,7 @@ void OTRCrypt::mayBeCreateClosure(QString &myacc, QString &himacc, TreeModelItem
     if(!(m_items.contains(myacc)&&
        m_items.value(myacc).contains(himacc)))
     {
-        PsiOtrClosure *closure = new PsiOtrClosure(myacc,himacc,meslist, item, m_plugin_system);
+        QutimOtrClosure *closure = new QutimOtrClosure(myacc,himacc,meslist, item, m_plugin_system);
         closure->setDialog(m_chatDlgAction);
         closure->setIsLoggedIn(true);
         m_items[myacc][himacc] = closure;

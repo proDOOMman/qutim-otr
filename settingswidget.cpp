@@ -16,7 +16,7 @@
 #include <QDir>
 #include <QDebug>
 
-SettingsWidget::SettingsWidget(psiotr::OtrMessaging *otr, PluginSystemInterface *plugin, QWidget *parent) :
+SettingsWidget::SettingsWidget(qutimotr::OtrMessaging *otr, PluginSystemInterface *plugin, QWidget *parent) :
     QWidget(parent),
     m_otr(otr),
     m_plugin(plugin)
@@ -24,30 +24,30 @@ SettingsWidget::SettingsWidget(psiotr::OtrMessaging *otr, PluginSystemInterface 
     setupUi(this);
     QSettings s(QSettings::defaultFormat(), QSettings::UserScope, "qutim/"+m_plugin->getProfileDir().dirName(), "otr");
     notify_checkbox->setChecked(s.value("notify",true).toBool());
-    switch(s.value("policy",psiotr::OTR_POLICY_AUTO).toInt())
+    switch(s.value("policy",qutimotr::OTR_POLICY_AUTO).toInt())
     {
-    case psiotr::OTR_POLICY_OFF:
+    case qutimotr::OTR_POLICY_OFF:
         polAuto->setChecked(false);
         polEnable->setChecked(false);
         polReq->setChecked(false);
         polAuto->setEnabled(false);
         polReq->setEnabled(false);
         break;
-    case psiotr::OTR_POLICY_REQUIRE:
+    case qutimotr::OTR_POLICY_REQUIRE:
         polAuto->setChecked(true);
         polEnable->setChecked(true);
         polReq->setChecked(true);
         polAuto->setEnabled(true);
         polReq->setEnabled(true);
         break;
-    case psiotr::OTR_POLICY_AUTO:
+    case qutimotr::OTR_POLICY_AUTO:
         polEnable->setChecked(true);
         polReq->setChecked(false);
         polAuto->setEnabled(true);
         polReq->setEnabled(true);
         polAuto->setChecked(true);
         break;
-    case psiotr::OTR_POLICY_ENABLED:
+    case qutimotr::OTR_POLICY_ENABLED:
         polAuto->setChecked(false);
         polEnable->setChecked(true);
         polReq->setChecked(false);
@@ -117,10 +117,10 @@ void SettingsWidget::updateFingerprints()
 {
     fingerprintsTable->setRowCount(0);
     m_fingerprints = m_otr->getFingerprints();
-    QListIterator<psiotr::Fingerprint> fingerprintIt(m_fingerprints);
+    QListIterator<qutimotr::Fingerprint> fingerprintIt(m_fingerprints);
     while(fingerprintIt.hasNext())
     {
-        psiotr::Fingerprint fp = fingerprintIt.next();
+        qutimotr::Fingerprint fp = fingerprintIt.next();
         fingerprintsTable->insertRow(fingerprintsTable->rowCount());
         fingerprintsTable->setItem(fingerprintsTable->rowCount()-1,0,new QTableWidgetItem(fp.account));
         fingerprintsTable->setItem(fingerprintsTable->rowCount()-1,1,new QTableWidgetItem(fp.username));
@@ -134,13 +134,13 @@ void SettingsWidget::updateFingerprints()
 void SettingsWidget::save()
 {
     QSettings s(QSettings::defaultFormat(), QSettings::UserScope, "qutim/"+m_plugin->getProfileDir().dirName(), "otr");
-    int pol = psiotr::OTR_POLICY_OFF;
+    int pol = qutimotr::OTR_POLICY_OFF;
     if(polReq->isChecked()&&polReq->isEnabled())
-        pol = psiotr::OTR_POLICY_REQUIRE;
+        pol = qutimotr::OTR_POLICY_REQUIRE;
     else if(polAuto->isChecked()&&polAuto->isEnabled())
-        pol = psiotr::OTR_POLICY_AUTO;
+        pol = qutimotr::OTR_POLICY_AUTO;
     else if(polEnable->isChecked()&&polEnable->isEnabled())
-        pol = psiotr::OTR_POLICY_ENABLED;
+        pol = qutimotr::OTR_POLICY_ENABLED;
     s.setValue("policy",pol);
     s.setValue("notify",notify_checkbox->isChecked());
     m_otr->setPolicy((OtrPolicy)pol);

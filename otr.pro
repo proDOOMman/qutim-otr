@@ -2,9 +2,9 @@ TRANSLATIONS = qutim_otr_ru.ts
 TARGET = otr
 TEMPLATE = lib
 HEADERS += otrcrypt.h \
-    psi/psiotrclosure.h \
-    psi/OtrMessaging.hpp \
-    psi/OtrInternal.hpp \
+    qutim/qutimotrclosure.h \
+    qutim/OtrMessaging.hpp \
+    qutim/OtrInternal.hpp \
     smpdialog.h \
     settingswidget.h \
     global.h
@@ -13,9 +13,9 @@ unix:INCLUDEPATH += /usr/include/libotr \
 windows:INCLUDEPATH += C:/otr/w32root/include
 windows:QMAKE_LIBDIR += C:/otr/w32root/lib
 SOURCES += otrcrypt.cpp \
-    psi/psiotrclosure.cpp \
-    psi/OtrMessaging.cpp \
-    psi/OtrInternal.cpp \
+    qutim/qutimotrclosure.cpp \
+    qutim/OtrMessaging.cpp \
+    qutim/OtrInternal.cpp \
     smpdialog.cpp \
     settingswidget.cpp
 CONFIG += qt \

@@ -17,10 +17,10 @@
 
 #include "ui_smpdialog.h"
 #include "qutim/protocolinterface.h"
-#include "psi/OtrMessaging.hpp"
+#include "qutim/OtrMessaging.hpp"
 
 using namespace qutim_sdk_0_2;
-using namespace psiotr;
+using namespace qutimotr;
 
 class SMPdialog : public QDialog, private Ui::SMPdialog {
     Q_OBJECT

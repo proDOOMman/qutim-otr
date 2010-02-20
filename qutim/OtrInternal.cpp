@@ -119,7 +119,7 @@ private:
 // ============================================================================
 
 OtrInternal::OtrInternal(qutim_sdk_0_2::PluginSystemInterface *plugin,
-                         psiotr::OtrPolicy& policy, OtrlUserState userstate)
+                         qutimotr::OtrPolicy& policy, OtrlUserState userstate)
     : m_userstate(),
       m_uiOps(),
       m_plugin(plugin),
@@ -332,7 +332,7 @@ QString OtrInternal::decryptMessage(const QString& from, const QString& to,
 
         QString retMessage("<Internal OTR message>\n"+tr("received %1 \nOTR state now is [%2]").arg(otrlMessageTypeToString(type)).arg(getMessageStateString(to, from, item))) ;
 
-        if (getMessageState(to, from, item) == psiotr::OTR_MESSAGESTATE_ENCRYPTED)
+        if (getMessageState(to, from, item) == qutimotr::OTR_MESSAGESTATE_ENCRYPTED)
         {
             retMessage.append(tr("\nsessionId: ") + getSessionId(to, from, item));
         }
@@ -365,9 +365,9 @@ QString OtrInternal::decryptMessage(const QString& from, const QString& to,
 
 //-----------------------------------------------------------------------------
 
-QList<psiotr::Fingerprint> OtrInternal::getFingerprints()
+QList<qutimotr::Fingerprint> OtrInternal::getFingerprints()
 {
-    QList<psiotr::Fingerprint> fpList;
+    QList<qutimotr::Fingerprint> fpList;
     ConnContext* context;
     ::Fingerprint* fingerprint;
 
@@ -377,7 +377,7 @@ QList<psiotr::Fingerprint> OtrInternal::getFingerprints()
         fingerprint = context->fingerprint_root.next;
         while(fingerprint)
         {
-            psiotr::Fingerprint fp;
+            qutimotr::Fingerprint fp;
 
             fp.account = QString(context->accountname);
 
@@ -415,7 +415,7 @@ QList<psiotr::Fingerprint> OtrInternal::getFingerprints()
 
 //-----------------------------------------------------------------------------
 
-void OtrInternal::verifyFingerprint(const psiotr::Fingerprint& fingerprint,
+void OtrInternal::verifyFingerprint(const qutimotr::Fingerprint& fingerprint,
                                     bool verified)
 {
     ConnContext* context;
@@ -446,7 +446,7 @@ void OtrInternal::deleteKey(QString account, QString protocol)
     otrl_privkey_forget(otrl_privkey_find(m_userstate,account.toLocal8Bit().data(),protocol.toLocal8Bit().data()));
 }
 
-void OtrInternal::deleteFingerprint(const psiotr::Fingerprint& fingerprint)
+void OtrInternal::deleteFingerprint(const qutimotr::Fingerprint& fingerprint)
 {
     ConnContext* context;
     ::Fingerprint* fp;
@@ -533,7 +533,7 @@ void OtrInternal::endSession(const QString& account, const QString& jid, TreeMod
 
 //-----------------------------------------------------------------------------
 
-psiotr::OtrMessageState OtrInternal::getMessageState(const QString& thisJid,
+qutimotr::OtrMessageState OtrInternal::getMessageState(const QString& thisJid,
                                                      const QString& remoteJid,
                                                      TreeModelItem &item)
 {
@@ -546,19 +546,19 @@ psiotr::OtrMessageState OtrInternal::getMessageState(const QString& thisJid,
     {
         if (context->msgstate == OTRL_MSGSTATE_PLAINTEXT)
         {
-            return psiotr::OTR_MESSAGESTATE_PLAINTEXT;
+            return qutimotr::OTR_MESSAGESTATE_PLAINTEXT;
         }
         else if (context->msgstate == OTRL_MSGSTATE_ENCRYPTED)
         {
-            return psiotr::OTR_MESSAGESTATE_ENCRYPTED;
+            return qutimotr::OTR_MESSAGESTATE_ENCRYPTED;
         }
         else if (context->msgstate == OTRL_MSGSTATE_FINISHED)
         {
-            return psiotr::OTR_MESSAGESTATE_FINISHED;
+            return qutimotr::OTR_MESSAGESTATE_FINISHED;
         }
     }
 
-    return psiotr::OTR_MESSAGESTATE_UNKNOWN;
+    return qutimotr::OTR_MESSAGESTATE_UNKNOWN;
 }
 
 //-----------------------------------------------------------------------------
@@ -567,13 +567,13 @@ int OtrInternal::getMessageStateIntCode(const QString& thisJid,
                                            const QString& remoteJid,
                                            TreeModelItem &item)
 {
-    psiotr::OtrMessageState state = getMessageState(thisJid, remoteJid, item);
+    qutimotr::OtrMessageState state = getMessageState(thisJid, remoteJid, item);
 
-    if (state == psiotr::OTR_MESSAGESTATE_PLAINTEXT)
+    if (state == qutimotr::OTR_MESSAGESTATE_PLAINTEXT)
     {
         return 0;
     }
-    else if (state == psiotr::OTR_MESSAGESTATE_ENCRYPTED)
+    else if (state == qutimotr::OTR_MESSAGESTATE_ENCRYPTED)
     {
         ConnContext* context = otrl_context_find(m_userstate,
                                                  remoteJid.toStdString().c_str(),
@@ -585,7 +585,7 @@ int OtrInternal::getMessageStateIntCode(const QString& thisJid,
 
         return 1;
     }
-    else if (state == psiotr::OTR_MESSAGESTATE_FINISHED)
+    else if (state == qutimotr::OTR_MESSAGESTATE_FINISHED)
     {
         return 3;
     }
@@ -597,13 +597,13 @@ QString OtrInternal::getMessageStateString(const QString& thisJid,
                                            const QString& remoteJid,
                                            TreeModelItem &item)
 {
-    psiotr::OtrMessageState state = getMessageState(thisJid, remoteJid, item);
+    qutimotr::OtrMessageState state = getMessageState(thisJid, remoteJid, item);
 
-    if (state == psiotr::OTR_MESSAGESTATE_PLAINTEXT)
+    if (state == qutimotr::OTR_MESSAGESTATE_PLAINTEXT)
     {
         return tr("not private");
     }
-    else if (state == psiotr::OTR_MESSAGESTATE_ENCRYPTED)
+    else if (state == qutimotr::OTR_MESSAGESTATE_ENCRYPTED)
     {
         ConnContext* context = otrl_context_find(m_userstate,
                                                  remoteJid.toStdString().c_str(),
@@ -615,7 +615,7 @@ QString OtrInternal::getMessageStateString(const QString& thisJid,
 
         return tr("unverifed");
     }
-    else if (state == psiotr::OTR_MESSAGESTATE_FINISHED)
+    else if (state == qutimotr::OTR_MESSAGESTATE_FINISHED)
     {
         return tr("finished");
     }
@@ -665,19 +665,19 @@ QString OtrInternal::getSessionId(const QString& thisJid,
 
 OtrlPolicy OtrInternal::policy(ConnContext*)
 {
-    if (m_otrPolicy == psiotr::OTR_POLICY_OFF)
+    if (m_otrPolicy == qutimotr::OTR_POLICY_OFF)
     {
         return OTRL_POLICY_NEVER; // otr disabled
     }
-    else if (m_otrPolicy == psiotr::OTR_POLICY_ENABLED)
+    else if (m_otrPolicy == qutimotr::OTR_POLICY_ENABLED)
     {
         return OTRL_POLICY_MANUAL; // otr enabled, session started manual
     }
-    else if (m_otrPolicy == psiotr::OTR_POLICY_AUTO)
+    else if (m_otrPolicy == qutimotr::OTR_POLICY_AUTO)
     {
         return OTRL_POLICY_OPPORTUNISTIC; // automatically initiate private messaging
     }
-    else if (m_otrPolicy == psiotr::OTR_POLICY_REQUIRE)
+    else if (m_otrPolicy == qutimotr::OTR_POLICY_REQUIRE)
     {
         return OTRL_POLICY_ALWAYS; // require private messaging
     }
@@ -901,13 +901,15 @@ void OtrInternal::sendCustomNessage(TreeModelItem &item, QString msg)
 {
     msg.replace("<b>"," ");
     msg.replace("</b>"," ");
+    msg.replace("<i>"," ");
+    msg.replace("</i>"," ");
     m_plugin->addServiceMessage(item,msg);
     m_plugin->systemNotification(item,msg);
 }
 
 void OtrInternal::requestAuth(TreeModelItem &item, bool agree, QString answer, QString question)
 {
-    psiotr::Fingerprint fingerprint;
+    qutimotr::Fingerprint fingerprint;
     bool found = false;
     foreach(fingerprint, getFingerprints())
     {

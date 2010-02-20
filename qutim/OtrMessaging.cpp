@@ -22,7 +22,7 @@
 #include "OtrMessaging.hpp"
 #include "OtrInternal.hpp"
 
-namespace psiotr
+namespace qutimotr
 {
 
 //-----------------------------------------------------------------------------
@@ -70,7 +70,7 @@ QList<Fingerprint> OtrMessaging::getFingerprints()
 
 //-----------------------------------------------------------------------------
 
-void OtrMessaging::verifyFingerprint(const psiotr::Fingerprint& fingerprint,
+void OtrMessaging::verifyFingerprint(const qutimotr::Fingerprint& fingerprint,
                                      bool verified)
 {
     m_impl->verifyFingerprint(fingerprint, verified);
@@ -78,7 +78,7 @@ void OtrMessaging::verifyFingerprint(const psiotr::Fingerprint& fingerprint,
 
 //-----------------------------------------------------------------------------
 
-void OtrMessaging::deleteFingerprint(const psiotr::Fingerprint& fingerprint)
+void OtrMessaging::deleteFingerprint(const qutimotr::Fingerprint& fingerprint)
 {
     m_impl->deleteFingerprint(fingerprint);
 }
@@ -144,7 +144,7 @@ QString OtrMessaging::getSessionId(const QString& thisJid,
 
 //-----------------------------------------------------------------------------
 
-void OtrMessaging::setPolicy(psiotr::OtrPolicy policy)
+void OtrMessaging::setPolicy(qutimotr::OtrPolicy policy)
 {
     m_otrPolicy = policy;
 }
@@ -158,4 +158,4 @@ OtrPolicy OtrMessaging::getPolicy()
 
 //-----------------------------------------------------------------------------
 
-} // namespace psiotr
+} // namespace qutimotr

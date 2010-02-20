@@ -18,14 +18,14 @@
 #include <QObject>
 #include <QHash>
 #include "global.h"
-#include "psi/OtrInternal.hpp"
-#include "psi/psiotrclosure.h"
-#include "psi/OtrMessaging.hpp"
-#include "psi/psiotrclosure.h"
+#include "qutim/OtrInternal.hpp"
+#include "qutim/qutimotrclosure.h"
+#include "qutim/OtrMessaging.hpp"
+#include "qutim/qutimotrclosure.h"
 #include "settingswidget.h"
 #include <QSystemSemaphore>
 
-using namespace psiotr;
+using namespace qutimotr;
 
 class OTRCrypt : public QObject, SimplePluginInterface, EventHandler
 {
@@ -71,7 +71,7 @@ private:
     OtrMessaging* m_otrConnectionManual;
     OtrMessaging* m_otrConnectionAuto;
     OtrMessaging* m_otrConnectionReq;
-    QHash<QString,QHash<QString,PsiOtrClosure *> > m_items;
+    QHash<QString,QHash<QString,QutimOtrClosure *> > m_items;
     TreeModelItem contextItem;
     QAction *m_chatDlgAction;
     SettingsWidget *m_settings_widget;

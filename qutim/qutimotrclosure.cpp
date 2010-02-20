@@ -1,5 +1,5 @@
 /*
- * psiotrclosure.cpp
+ * qutimotrclosure.cpp
  *
  * Copyright (C) Timo Engel (timo-e@freenet.de), Berlin 2007.
  * This program was written as part of a diplom thesis advised by
@@ -23,19 +23,19 @@
  *
  */
 
-#include "psiotrclosure.h"
+#include "qutimotrclosure.h"
 #include "OtrMessaging.hpp"
 
 #include <QAction>
 #include <QMenu>
 #include <QMessageBox>
 
-namespace psiotr
+namespace qutimotr
 {
 
 //-----------------------------------------------------------------------------
 
-PsiOtrClosure::PsiOtrClosure(QString &account, const QString& toJid,
+QutimOtrClosure::QutimOtrClosure(QString &account, const QString& toJid,
                              QList<OtrMessaging*> otrcList, TreeModelItem &item,
                              PluginSystemInterface* pluginSystem)
         : /*m_otr(otrcList.at(0)),*/
@@ -63,13 +63,13 @@ PsiOtrClosure::PsiOtrClosure(QString &account, const QString& toJid,
 
 //-----------------------------------------------------------------------------
 
-PsiOtrClosure::~PsiOtrClosure()
+QutimOtrClosure::~QutimOtrClosure()
 {
 }
 
 //-----------------------------------------------------------------------------
 
-void PsiOtrClosure::initiateSession(bool b)
+void QutimOtrClosure::initiateSession(bool b)
 {
         Q_UNUSED(b);
         QSettings s(QSettings::defaultFormat(), QSettings::UserScope, "qutim/"+m_pluginSystem->getProfileDir().dirName(), "otr");
@@ -77,7 +77,7 @@ void PsiOtrClosure::initiateSession(bool b)
         m_otr->startSession(m_myAccount, m_otherJid, m_item, pol);
 }
 
-void PsiOtrClosure::setPolicy(int pol)
+void QutimOtrClosure::setPolicy(int pol)
 {
     QSettings s(QSettings::defaultFormat(), QSettings::UserScope, "qutim/"+m_pluginSystem->getProfileDir().dirName(), "otr");
     if (pol!=s.value(m_item.m_protocol_name+"/"+m_item.m_account_name+"/"+m_item.m_item_name,-1).toInt())
@@ -104,7 +104,7 @@ void PsiOtrClosure::setPolicy(int pol)
 
 //-----------------------------------------------------------------------------
 
-void PsiOtrClosure::verifyFingerprint(bool)
+void QutimOtrClosure::verifyFingerprint(bool)
 {
     SMPdialog dialog(m_item,m_otr,m_parentWidget);
     dialog.exec();
@@ -112,7 +112,7 @@ void PsiOtrClosure::verifyFingerprint(bool)
 
 //-----------------------------------------------------------------------------
 
-void PsiOtrClosure::sessionID(bool)
+void QutimOtrClosure::sessionID(bool)
 {
     QString sId = m_otr->getSessionId(m_myAccount,
                                       m_otherJid.toStdString().c_str(),m_item);
@@ -138,7 +138,7 @@ void PsiOtrClosure::sessionID(bool)
 
 //-----------------------------------------------------------------------------
 
-void PsiOtrClosure::endSession(bool b)
+void QutimOtrClosure::endSession(bool b)
 {
         Q_UNUSED(b);
         m_otr->endSession(m_myAccount, m_otherJid, m_item);
@@ -147,7 +147,7 @@ void PsiOtrClosure::endSession(bool b)
 
 //-----------------------------------------------------------------------------
 
-void PsiOtrClosure::fingerprint(bool)
+void QutimOtrClosure::fingerprint(bool)
 {
     QString fingerprint =  (m_otr->getPrivateKeys().value(m_myAccount).value(m_item.m_protocol_name,
                                                                              tr("no private key for ") +
@@ -161,7 +161,7 @@ void PsiOtrClosure::fingerprint(bool)
         mb.exec();
 }
 
-void PsiOtrClosure::setDialog(QAction *a)
+void QutimOtrClosure::setDialog(QAction *a)
 {
     m_chatDlgMenu = a->menu();
     m_chatDlgAction = a;
@@ -175,7 +175,7 @@ void PsiOtrClosure::setDialog(QAction *a)
 
 //-----------------------------------------------------------------------------
 
-void PsiOtrClosure::updateState()
+void QutimOtrClosure::updateState()
 {
     qint16 newState = this->getState();
     if(prevState==666)
@@ -185,7 +185,7 @@ void PsiOtrClosure::updateState()
     {
         bool enabled = false;
         QSettings s(QSettings::defaultFormat(), QSettings::UserScope, "qutim/"+m_pluginSystem->getProfileDir().dirName(), "otr");
-        if(s.value("policy",psiotr::OTR_POLICY_AUTO).toInt()!=psiotr::OTR_POLICY_OFF)
+        if(s.value("policy",qutimotr::OTR_POLICY_AUTO).toInt()!=qutimotr::OTR_POLICY_OFF)
             enabled = true;
         if(!s.value(m_item.m_protocol_name+"/"+m_item.m_account_name+"/"+m_item.m_item_name,-1).toInt())
             enabled = false;
@@ -201,7 +201,7 @@ void PsiOtrClosure::updateState()
     }
 }
 
-void PsiOtrClosure::updateMessageState()
+void QutimOtrClosure::updateMessageState()
 {
     if (m_chatDlgAction != 0)
     {
@@ -248,14 +248,14 @@ void PsiOtrClosure::updateMessageState()
 
 //-----------------------------------------------------------------------------
 
-void PsiOtrClosure::setIsLoggedIn(bool isLoggedIn)
+void QutimOtrClosure::setIsLoggedIn(bool isLoggedIn)
 {
         m_isLoggedIn = isLoggedIn;
 }
 
 //-----------------------------------------------------------------------------
 
-bool PsiOtrClosure::isLoggedIn() const
+bool QutimOtrClosure::isLoggedIn() const
 {
         return m_isLoggedIn;
 }
