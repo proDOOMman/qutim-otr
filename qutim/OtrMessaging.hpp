@@ -211,7 +211,8 @@ public:
     */
     OtrPolicy getPolicy();
 
-    void requestAuth(TreeModelItem &item, bool agree, QString answer = 0, QString question = 0);
+    // TODO: check this function
+    void requestAuth(TreeModelItem &item, bool agree, QString answer = QString(), QString question = QString());
 
 
 private:
